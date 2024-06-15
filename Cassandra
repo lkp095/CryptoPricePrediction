@@ -1,0 +1,93 @@
+* Cassandra Installation :
+STEPS :
+
+1) sudo apt update
+
+2) sudo apt install openjdk-8-jdk -y
+
+3) java -version
+
+4) sudo update-alternatives --config java   ------ Set Java Version to jdk-8
+
+5) echo "deb http://www.apache.org/dist/cassandra/debian 40x main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
+
+6) sudo apt install apt-transport-https
+
+7) wget https://www.apache.org/dist/cassandra/KEYS && sudo apt-key add KEYS
+
+8) sudo apt update
+
+9) sudo apt install cassandra
+
+10) pip install cqlsh
+
+
+* Start CQL Shell :
+STEPS :
+
+1) sudo service cassandra start
+
+2) nodetool status
+
+3) cqlsh
+
+
+* Create KEYSPACE :
+> CREATE KEYSPACE cryptocurrency WITH REPLICATION = {'class': 'SimpleStrategy', 'replication_factor':'1'};
+
+* Describe KEYSPACE :
+> describe keyspaces;
+
+* Use specific keyspace :
+> USE cryptocurrency;
+
+
+* Create table :
+> CREATE TABLE currencies (symbol text, date_time timestamp, high double, low double, open double, close double, volume double, marketcap double, PRIMARY KEY(symbol, date_time));
+
+* Show table content :
+> SELECT * FROM currencies;
+
+* Copy data from "coin_Bitcoin.csv" csv file to table :
+> COPY currencies (symbol, date_time, high, low, open, close, volume, marketcap) FROM '/home/ubuntu/Project/Dataset/coin_Bitcoin.csv' WITH DELIMITER=',' AND HEADER=TRUE;
+
+> COPY currencies (symbol, date_time, high, low, open, close, volume, marketcap) FROM '/home/ubuntu/Project/Dataset/coin_Ethereum.csv.csv' WITH DELIMITER=',' AND HEADER=TRUE;
+
+> COPY currencies (symbol, date_time, high, low, open, close, volume, marketcap) FROM '/home/ubuntu/Project/Dataset/coin_Monero.csv' WITH DELIMITER=',' AND HEADER=TRUE;
+
+> COPY currencies (symbol, date_time, high, low, open, close, volume, marketcap) FROM '/home/ubuntu/Project/Dataset/coin_XRP.csv' WITH DELIMITER=',' AND HEADER=TRUE;
+
+> COPY currencies (symbol, date_time, high, low, open, close, volume, marketcap) FROM '/home/ubuntu/Project/Dataset/coin_Dogecoin.csv' WITH DELIMITER=',' AND HEADER=TRUE;
+
+> COPY currencies (symbol, date_time, high, low, open, close, volume, marketcap) FROM '/home/ubuntu/Project/Dataset/coin_Litecoin.csv' WITH DELIMITER=',' AND HEADER=TRUE;
+
+> COPY currencies (symbol, date_time, high, low, open, close, volume, marketcap) FROM '/home/ubuntu/Project/Dataset/coin_Stellar.csv' WITH DELIMITER=',' AND HEADER=TRUE;
+
+
+* See data in table :
+> SELECT * FROM currencies;
+
+
+* Read Data in Pandas Dataframe from cassandra table :
+
+	- Frist we have to install Cassandra driver:
+	 $ pip install cassandra-driver
+
+	- Open python file to connet with cassandra :
+	- "Connect_Cassandra.ipynb" file to get data into pandas DF.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
